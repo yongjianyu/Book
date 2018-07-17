@@ -20,7 +20,7 @@ public class Query {
 	}
 	
 	/***
-	 *
+	 *获取数据库连接
 	 * @return
 	 */
 	public Connection getConnection() {
@@ -34,7 +34,7 @@ public class Query {
 	}
 	
 	/***
-	 * 
+	 * 进行增加，删除，更新
 	 * @param sql
 	 * @param params
 	 * @return
@@ -58,7 +58,7 @@ public class Query {
 	
 	
 	/***
-	 * 
+	 * 进行单条记录查询
 	 * @param sql
 	 * @param params
 	 * @return
@@ -92,7 +92,7 @@ public class Query {
 	
 	
 	/***
-	 *
+	 *进行多条记录查询
 	 * @param sql
 	 * @param params
 	 * @return

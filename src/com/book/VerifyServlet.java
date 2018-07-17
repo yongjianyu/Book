@@ -2,8 +2,9 @@ package com.book;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class add
+ * Servlet implementation class CheckServlet
  */
-@WebServlet("/AddServlet")
-public class AddServlet extends HttpServlet {
+@WebServlet("/VerifyServlet")
+public class VerifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddServlet() {
+    public VerifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,34 +40,29 @@ public class AddServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		doGet(request, response);
+		String user,password,sql;
+		Map<String, Object> map = new HashMap<String,Object>();
 		request.setCharacterEncoding("utf-8");
-		boolean flag = false;
-		String name = request.getParameter("name").toString();
-		int price =	Integer.parseInt(request.getParameter("price"));
-		int count = Integer.parseInt(request.getParameter("count"));
-		String author = request.getParameter("author").toString();
-		String sql = "insert into book(book_name,book_price,book_count,book_author) values(?,?,?,?) ";
-		List<Object> params = new ArrayList<Object>();
-		params.add(name);
-		params.add(price);
-		params.add(count);
-		params.add(author);
+		user = request.getParameter("user");
+		password = request.getParameter("password");
 		Query query = new Query();
 		query.getConnection();
+		sql = "select id from user where name='"+user+"' and password='"+password+"'";
+		List<Object> list = null;
 		try {
-			flag = query.update(sql, params) ? true : false;
+			map = query.findsimple(sql, list);
+			if(!map.isEmpty()) {
+				request.getRequestDispatcher("FindServlet").forward(request, response);
+			}else {
+				request.setAttribute("map", map);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(flag) {
-			response.sendRedirect("FindServlet");
-		}else {
-			response.sendRedirect("add.jsp");
-		}
-			
 		
 	}
-		
 
 }

@@ -30,7 +30,7 @@ public class FindServlet extends HttpServlet {
     public FindServlet() {
         super();
         // TODO Auto-generated constructor stub
-    }
+    }	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,11 +40,8 @@ public class FindServlet extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/admin";
-			String user = "root";
-			String password = "yu902377";
-			Connection con = DriverManager.getConnection(url, user, password);
+			Class.forName(config.driver);
+			Connection con = DriverManager.getConnection(config.url, config.user, config.password);
 			Statement sql = con.createStatement();
 //			sql.executeQuery("set names utf-8");
 			String str = "select *  from book";
