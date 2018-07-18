@@ -10,73 +10,18 @@
 <link rel="stylesheet" type="text/css" href="css/screen.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<style type="text/css">
-		.login{
-			background-image: url(image/login.jpg);
-		}
-
-		.box{
-			margin-top: 10%;
-			/*border-radius: 4%;*/
-			box-sizing: border-box;
-			height:15em;
-			/*border: 1px solid grey;*/
-			/*background: white;*/
-		}
-		
-		.login_title{
-			/*margin-bottom: 3em;*/
-			/*border-radius: 3%;*/
-			background: #259ef7;
-			line-height:3em;
-			text-align-last: center;
-			font-size: 20px;
-			color: white;
-		}
-
-		.login_content{
-			box-sizing: border-box;
-			/*border:1px solid grey;*/
-			background: white;
-			height: 12em;
-		}
-
-		input[type="text"]{
-			margin: .5em 5% .5em 5%;
-			border-radius: 3%; 
-			width: 90%;
-			height: 3em;
-			border: solid 1px #d4d4d4;
-			font-size: 16px;
-			color: #cbcbcb;
-			transition: 1s;
-
-		}
-
-
-		input[type="submit"]{
-			border-radius: 5%/1%;
-			margin-top: 2em;
-			width: 100%;
-			background:#259ef7; 
-			line-height:2.5em;
-			text-align-last: center;
-			font-size: 20px;
-			color: white;
-		}
-	</style>
-
 <body class="login">
 
 <%
+	/* 
 	Map<String,Object> map = new HashMap<String,Object>();
 	request.setCharacterEncoding("utf-8");
-	map = (Map<String,Object>)request.getAttribute("map");
-	if(map.isEmpty()){
+	map = session.
+	if(map.isEmpty() && map != null){
 		out.print("<script type='text/javascript'> ");
 		out.print("alert('登陆失败'); ");
 		out.print("</script>");
-	}
+	}*/
 	
 %>
 	<div class="container">

@@ -1,8 +1,8 @@
 /**
  * index.html
  */
-.login{
-			background-image: url(image/login.jpg);
+		.login{
+			background-image: url(../images/login.jpg);
 		}
 
 		.box{
@@ -53,4 +53,105 @@
 			text-align-last: center;
 			font-size: 20px;
 			color: white;
+		}
+
+		/**
+		 * main.jsp
+		 */
+		.main-body{
+			background: #cacaca;
+		}
+		.header{
+			line-height: 3em;
+			background: #259ef7;
+		}
+		
+		.bar-control span{
+			cursor: pointer;
+			padding-left:1em; 
+			font-size: 20px;
+			color: white;
+			font-weight: bold;
+		}
+
+		.user{position: relative;}
+		.user:hover .user-bar{
+			display: block;
+		}
+		.user-bar{
+			display:none;
+			position: absolute;
+			width: 8em;
+			background: white;
+			transition: .5s;
+		}
+
+		.user-bar li{
+			text-align-last: center;
+			list-style: none;
+			width: 100%;
+		}
+		.user-bar li:hover{
+			background: #259ef7;
+		}
+
+		.user-bar li a{
+			font-size: 16px;
+			color: grey;
+		}
+
+		.main-bar{
+			/*border: 1px solid grey;*/
+			box-shadow: 1px 3px 1px 1px white; 
+			width: 10em;
+			background: white;
+			text-align-last: center;
+		}
+
+
+		.main-content{
+			margin-left: 10em;
+			transition: .5s;
+		}
+		.content-title{
+			margin: .5em 0 .5em 0;
+			font-size: 24px;
+			color: black;
+			text-align-last: center;
+
+		}
+		table{
+			margin: 0 auto;
+			border: 1px solid grey;
+		}
+		.sidebar{
+			margin-top:2em;
+			transition: .5s;
+		}
+		.sidebar li{
+			line-height: 3em;
+			display: block;
+			width: 100%;
+			border-bottom: 1px solid #cacaca;
+			transition: .5s ease;
+		}
+		.sidebar li a{
+			font-size: 16px;
+			color: black;
+		}
+		.sidebar li:hover{
+			background:#259ef7; 
+		}
+
+		.header-img{
+			vertical-align: middle;
+		}
+		.header-text{
+			cursor: pointer;
+			margin: 0 .5em 0 .5em;
+			font-size: 18px;
+			color: white;
+		}
+		.on{
+			background: #259ef7 !important;;
 		}
