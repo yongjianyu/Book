@@ -2,28 +2,26 @@ package com.book;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class CheckServlet
+ * Servlet implementation class UpdateUserServlet
  */
-@WebServlet("/VerifyServlet")
-public class VerifyServlet extends HttpServlet {
+@WebServlet("/UpdateUserServlet")
+public class UpdateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VerifyServlet() {
+    public UpdateUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,30 +40,29 @@ public class VerifyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
-		HttpSession session = request.getSession();
-		String user,password,sql;
-		Map<String, Object> map = new HashMap<String,Object>();
 		request.setCharacterEncoding("utf-8");
-		user = request.getParameter("user");
-		password = request.getParameter("password");
+		boolean flag = false;
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
+		String name = request.getParameter("name").toString();
+		String password = request.getParameter("password").toString();
+		List<Object> params = new ArrayList<Object>();
+		String sql = "UPDATE user SET name='"+name+"' , password='"+password+"' where id=? ";
+		params.add(user_id);
 		Query query = new Query();
 		query.getConnection();
-		sql = "select id,image_link from user where name='"+user+"' and password='"+password+"'";
-		List<Object> list = null;
 		try {
-			map = query.findsimple(sql, list);
-			if(!map.isEmpty()) {
-				session.setAttribute("key","1");
-				session.setAttribute("user_id",map.get("id"));
-				session.setAttribute("image_link", map.get("image_link"));
-				request.getRequestDispatcher("FindServlet").forward(request, response);
-			}else {
-				request.setAttribute("map", map);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-			}
+			flag = query.update(sql, params);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if(flag) {
+			request.setAttribute("updateuser_message", "1");
+			request.getRequestDispatcher("FindServlet").forward(request, response);
+		}else {
+			request.setAttribute("sql", sql);
+			request.setAttribute("updateuser_message", "0");
+			request.getRequestDispatcher("user.jsp").forward(request, response);
 		}
 		
 	}

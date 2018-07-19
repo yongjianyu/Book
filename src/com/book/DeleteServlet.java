@@ -32,9 +32,7 @@ public class DeleteServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		int id = Integer.parseInt(request.getParameter("id"));
-		PreparedStatement ps;
 		String sql;
-		Connection con;
 		boolean flag = false;
 		sql = "delete from book where book_id=?";
 		List<Object> list = new ArrayList<Object>();

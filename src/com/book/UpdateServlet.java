@@ -48,7 +48,6 @@ public class UpdateServlet extends HttpServlet {
 		int count = Integer.parseInt(request.getParameter("count"));
 		String author = request.getParameter("author").toString();
 		String sql = "update book set book_name='"+name+"' ,book_price=?,book_count=?,book_author='"+author+"' where book_id=?";
-		String sql2 = "update book set book_name='"+name+"' ,book_price="+price+",book_count="+count+",book_author='"+author+"' where book_id="+id+" ";
 		List<Object> params = new ArrayList<Object>();
 		params.add(price);
 		params.add(count);

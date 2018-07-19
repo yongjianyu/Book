@@ -1,16 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.util.*"%>
 <%@page import="java.util.List"%>
 <%@page import="com.book.Book"%>
-
-<jsp:useBean id="book" class="com.book.Book"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>首页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/screen.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -37,7 +35,6 @@
 
 				<ul class="user-bar">
 					<li><a href="user.jsp?user_id=<%=user_id %>">用户信息</a></li>
-					<li><a href="userimage.jsp?user_id=<%=user_id %>">更改头像</a></li>
 					<li><a href="index.jsp">登出</a></li>
 				</ul>
 			</div>
@@ -51,31 +48,12 @@
 				</ul>
 			</div>
 			<div class="f-12 main-content">
-				<div class="content-title">所有书籍列表</div>
+				<div class="content-title">消息</div>
 				<%
 					request.setCharacterEncoding("utf-8");
-					List<Book> list =(List<Book>)request.getAttribute("list");
-					if(list == null ||list.size()<1){
-						out.print("没有数据奥");
-					}else{
-					//List<Book> list = new ArrayList<Book>();
-						out.print("<table border='1'> ");
-						out.print("<tr><td>编号</td><td>名称</td><td>价格</td><td>数量</td><td>作者</td><td></td></tr> ");
+					//UpdateUserServlet传来的message
+					if(request.getAttribute("updateuser_message") != null){
 						
-						for(Book b :list){
-				%>
-				<tr>
-					<td><%=b.getBook_id() %></td>
-					<td><%=b.getBook_name() %></td>
-					<td><%=b.getBook_price() %></td>
-					<td><%=b.getBook_count() %></td>
-					<td><%=b.getBook_author() %></td>
-					<td><a href="revise.jsp?id=<%=b.getBook_id() %>">修改</a>/ <a
-						href="DeleteServlet?id=<%=b.getBook_id() %>">删除</a></td>
-				</tr>
-				<%
-						}
-						out.print("</table> ");
 					}
 				%>
 			</div>

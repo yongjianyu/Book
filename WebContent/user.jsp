@@ -1,10 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="java.util.*" %>
+<%@page import="java.sql.*" %>
+<%@page import="com.book.Query" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>添加</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户</title>
 <link rel="stylesheet" type="text/css" href="css/screen.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -12,7 +15,7 @@
 <%
 	String key = (String)session.getAttribute("key");
 	if(key != null){
-		int user_id =(int)session.getAttribute("user_id");
+		
 %>
 
 	<div class="container">
@@ -26,12 +29,11 @@
 			</div>
 			<div class="f-3"></div>
 			<div class="f-1 user">
-				<img class="header-img" src="<%=session.getAttribute("image_link") %>" width="36" height="36" alt="">
+				<img class="header-img" src="<%=session.getAttribute("image_link") %>" width="36" height="36" alt=""m>
 				<span class="header-text user-text">admin</span>
 
 				<ul class="user-bar">
-					<li><a href="user.jsp?user_id=<%=user_id %>">用户信息</a></li>
-					<li><a href="userimage.jsp?user_id=<%=user_id %>">更改头像</a></li>
+					<li><a href="">用户信息</a></li>
 					<li><a href="index.jsp">登出</a></li>
 				</ul>
 			</div>
@@ -41,18 +43,37 @@
 			<div class="main-bar">
 				<ul class="sidebar">
 					<li class=""><a href="FindServlet">所有书籍</a></li>
-					<li class="on"><a href="add.jsp">添加书籍</a></li>
+					<li><a href="add.jsp">添加书籍</a></li>
 				</ul>
 			</div>
 			<div class="f-12 main-content">
-				<div class="content-title">添加书籍</div>
+				<div class="content-title">用户信息</div>
+				<%
+					request.setCharacterEncoding("utf-8");
+					int user_id = Integer.parseInt(request.getParameter("user_id"));
+					String sql = "select * from user where id=?";
+					List<Object> list = new ArrayList<Object>();
+					list.add(user_id);
+					Query q = new Query();
+					q.getConnection();
+					Map<String,Object> map = new HashMap<String , Object>();
+					map = q.findsimple(sql, list);
+				%>
 				<div class="user-content">
-					<form action="AddServlet" method="post">
-						<input type="text" name="name" value="书籍名称"> <br> 
-						<input type="text" name="price" value="书籍价格"> <br> 
-						<input type="text" name="count" value="书籍数量"> <br> 
-						<input type="text" name="author" value="作者姓名"><br>
-						 <input type="submit" value="添加" name="submit2">
+					<form action="UpdateUserServlet"  method="post">
+						<input type="text" name="user_id" value="<%=user_id %>"  hidden>
+
+						<div class="user-name">
+							<input type="text" name="name" value="<%=map.get("name")%>">
+						</div>
+
+						<div class="user-password">
+							<input type="text" name="password" value="<%=map.get("password")%>">
+						</div>
+
+						<div>
+							<input type="submit" name="submit2" value="保存">
+						</div>
 					</form>
 				</div>
 			</div>

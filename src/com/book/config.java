@@ -2,11 +2,20 @@ package com.book;
 
 public class config {
 	/**
-	 * Êı¾İ¿âÅäÖÃÊı¾İ
+	 * æ•°æ®åº“é…ç½®æ•°æ®
 	 */
-	public static  String user = "root";
+	public static String user = "root";
 	public static String password = "yu902377";
 	public static String database = "admin";
 	public static String url = "jdbc:mysql://localhost/"+database;
 	public static String driver = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * ä¸Šä¼ æ–‡ä»¶é…ç½®
+	 */
+	
+	public static String upload_directory = "images";
+ 	public static int memory_threshold = 1024 * 1024 * 3;  // 3MB
+    public static int max_file_size = 1024 * 1024 * 40; // 40MB
+    public static int max_request_size = 1024 * 1024 * 50; // 50MB
 }
