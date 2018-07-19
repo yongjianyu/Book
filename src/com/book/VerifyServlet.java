@@ -58,7 +58,7 @@ public class VerifyServlet extends HttpServlet {
 				session.setAttribute("key","1");
 				session.setAttribute("user_id",map.get("id"));
 				session.setAttribute("image_link", map.get("image_link"));
-				request.getRequestDispatcher("FindServlet").forward(request, response);
+				request.getRequestDispatcher("FindServlet?nextPage=1").forward(request, response);
 			}else {
 				request.setAttribute("map", map);
 				request.getRequestDispatcher("index.jsp").forward(request, response);

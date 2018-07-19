@@ -1,11 +1,6 @@
 package com.book;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -39,36 +34,24 @@ public class FindServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
-		try {
-			Class.forName(config.driver);
-			Connection con = DriverManager.getConnection(config.url, config.user, config.password);
-			Statement sql = con.createStatement();
-//			sql.executeQuery("set names utf-8");
-			String str = "select *  from book";
-			ResultSet rs = sql.executeQuery(str);
-			List<Book> list =  new ArrayList<Book>();
-			while(rs.next()) {
-				Book book = new Book();
-				book.setBook_id(rs.getInt("book_id"));
-				book.setBook_name(rs.getString("book_name"));
-				book.setBook_price(rs.getInt("book_price"));
-				book.setBook_count(rs.getInt("book_count"));
-				book.setBook_author(rs.getString("book_author"));
-				list.add(book);
-			}
-			request.setAttribute("list", list);
-			rs.close();
-			sql.close();
-			con.close();
-			
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int nextPage = 1;
+		int totalPage;
+		List<Book> list = new ArrayList<Book>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(request.getParameter("nextPage") == null) {
+			nextPage = 1;
+		}else {
+			nextPage = Integer.parseInt(request.getParameter("nextPage"));
 		}
+		Pagination page = new Pagination(nextPage);
+		page.Count();
+		list = page.putPage();
+		map = page.Button_Link();
+		totalPage = page.totalPage();
+		request.setAttribute("list", list);
+		request.setAttribute("map", map);		
+		request.setAttribute("nextPage", nextPage);
+		request.setAttribute("totalPage", totalPage);
 		
 		request.getRequestDispatcher("main.jsp").forward(request, response);
 		
