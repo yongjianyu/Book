@@ -43,7 +43,7 @@
 		<div class="row main">
 			<div class="main-bar">
 				<ul class="sidebar">
-					<li class="on"><a href="FindServlet">所有书籍</a></li>
+					<li class="on"><a href="FindServlet?nextPage=1">所有书籍</a></li>
 					<li><a href="add.jsp">添加书籍</a></li>
 				</ul>
 			</div>

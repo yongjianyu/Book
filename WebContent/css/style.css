@@ -79,6 +79,7 @@
 			display: block;
 		}
 		.user-bar{
+			z-index:999;
 			display:none;
 			position: absolute;
 			width: 70%;
@@ -110,6 +111,7 @@
 
 
 		.main-content{
+			position: relative;
 			width: 90%;
 			margin-left: 10em;
 			transition: .5s;
@@ -179,4 +181,34 @@
 		.upload{
 			margin: 0 auto;
 			width: 90%;
+		}
+
+		/**
+		 * 分页css设置
+		 */
+		.pagination{
+			position: absolute;
+			bottom: -13%;
+			right: 15%;
+		}
+
+		.pagination li{
+			cursor: pointer;
+			float: left;
+			border: 1px solid #cacaca; 
+			border-radius: 10%;
+			list-style: none;
+			min-width:1.5em; 
+			background: #259ef7;
+			text-align-last: center;
+			
+		}
+		.pagination li a{
+			width: 100%;
+			font-size: 16px;
+			color: #cbcbcb;
+		}
+
+		.current{
+			background: #1b42d1 !important;
 		}

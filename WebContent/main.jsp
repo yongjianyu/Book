@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@page import="java.sql.*"%>
-<%@page import="java.util.*"%>
-<%@page import="java.util.List"%>
-<%@page import="com.book.Book"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.book.Book"%>
 
 <jsp:useBean id="book" class="com.book.Book"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,6 +54,9 @@
 				<%
 					request.setCharacterEncoding("utf-8");
 					List<Book> list =(List<Book>)request.getAttribute("list");
+					Map<String,Object> map = (Map<String,Object>)request.getAttribute("map");
+					int nextPage = (int)request.getAttribute("nextPage");
+					int totalPage = (int)request.getAttribute("totalPage");
 					if(list == null ||list.size()<1){
 						out.print("没有数据奥");
 					}else{
@@ -78,6 +80,14 @@
 						out.print("</table> ");
 					}
 				%>
+				<div class="pagination">
+					<ul>
+						<li><a href="<%=map.get("prevLink") %>">上一页</a></li>
+						<li><a href="<%=map.get("nextLink") %>">下一页</a></li>
+						<li><a>当前第<%=nextPage %>页</a></li>
+						<li><a>共<%=totalPage %>页</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 
